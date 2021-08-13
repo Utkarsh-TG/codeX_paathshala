@@ -1,3 +1,23 @@
-from django.shortcuts import render
+import os
+from django.conf import settings
+from django.shortcuts import render, redirect
+from django.http.response import HttpResponse, JsonResponse
+from django.contrib.auth.forms import UserCreationForm
+from .forms import CreateUserForm
 
-# Create your views here.
+def ignition(request):
+    return HttpResponse('Run Successfull!', status='200')
+
+def home(request):
+    return render(request, 'main/home.html')
+
+def signup(request):
+    form = CreateUserForm()
+    
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST) # create new user with form input
+        if form.is_valid(): # validate form input
+            form.save()
+
+    context = {'form':form}
+    return render(request, 'main/signup.html', context)
