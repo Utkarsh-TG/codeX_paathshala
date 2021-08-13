@@ -1,7 +1,6 @@
 import os
 import json
 from pathlib import Path
-import django_heroku
 from dotenv import load_dotenv 
 
 load_dotenv() # load environment variables
