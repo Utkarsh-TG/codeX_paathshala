@@ -1,7 +1,6 @@
 import os
 import json
 from pathlib import Path
-import django_heroku
 from dotenv import load_dotenv 
 
 load_dotenv() # load environment variables
@@ -107,11 +106,11 @@ USE_TZ = True
 
 
 # load static files
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # set static files root
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static/'), # set static dir
 )
-STATIC_URL = os.path.join(BASE_DIR, '/static/')
+STATIC_URL = os.path.join(BASE_DIR, '/static/') # set static url
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
