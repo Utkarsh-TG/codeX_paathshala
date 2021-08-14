@@ -130,3 +130,7 @@ dmypy.json
 
 # database
 db.sqlite3
+
+#pycache
+__pycache__
+.pyc
