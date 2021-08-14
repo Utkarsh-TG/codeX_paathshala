@@ -112,6 +112,9 @@ STATICFILES_DIRS = (
 )
 STATIC_URL = os.path.join(BASE_DIR, '/static/') # set static url
 
+LOGIN_REDIRECT_URL = '/login/' # default login redirect url
+LOGIN_URL = '/login/'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
