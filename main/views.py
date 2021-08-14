@@ -17,7 +17,11 @@ def signup(request):
     if request.method == 'POST':
         form = CreateUserForm(request.POST) # create new user with form input
         if form.is_valid(): # validate form input
-            form.save()
+            form.save() # save form
 
     context = {'form':form}
     return render(request, 'main/signup.html', context)
+
+def login(request):
+    context = {}
+    return render(request, 'main/login.html', context)
