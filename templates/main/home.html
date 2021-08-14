@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | PaathShala</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main/home.css' %}">
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <div class="website-logo-wrapper">
+                <img src="{% static 'images/logowtext.png' %}" alt="logo image" width="200px" height="120px" id="logo-img">
+            </div>
+            <div class="nav-links-wrapper">
+                <a href="#features-container">Features</a>
+                <a href="{% url 'signup' %}">Signup</a>
+                <a href="{% url 'login' %}">Login</a>
+            </div>
+        </nav>
+        <div class="main-content-wrapper">
+            <div class="content-left"></div>
+            <div class="content-right">
+                <img src="{% static 'images/landingpagecontentright.png' %}" alt="study" srcset="" width="800px" height="500px">
+                <a href='https://www.freepik.com/vectors/school' hidden>School vector created by pch.vector - www.freepik.com</a>
+            </div>
+        </div>
+    </div>
+</body>
