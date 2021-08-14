@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | PaathShala</title>
+</head>
+<body>
+    <svg width="80" height="80" data-jdenticon-value="{{ request.user }}"></svg>
+    <h2>Logged In successful as {{ request.user }}</h2>
+    <a href="{% url 'logout' %}">Logout</a>
+    <script src="https://cdn.jsdelivr.net/npm/jdenticon@3.1.1/dist/jdenticon.min.js" integrity="sha384-l0/0sn63N3mskDgRYJZA6Mogihu0VY3CusdLMiwpJ9LFPklOARUcOiWEIGGmFELx" crossorigin="anonymous"></script>
+</body>
+</html>

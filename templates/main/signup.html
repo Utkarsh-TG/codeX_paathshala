@@ -42,13 +42,16 @@
                 <input type="submit" class="submit-form-btn btn" id="signup-submit-btn" value="Submit">
             </form>
             <div class="error-log">
-                {% for field in form %}
-                {% if field.errors %}
-                    {% for error in field.errors %}
-                        <li class="errorlist">{{ error|escape }}</li>
+                {% for message in messages %}
+                    <span class="error-msg">{{message}}</span>
+                {% endfor %}
+                {% if form.errors %}
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <li class="errorlist">{{ error }}</li>
+                        {% endfor %}
                     {% endfor %}
                 {% endif %}
-                {% endfor %}
             </div>
             <div class="login-btn">
                 <a href="{% url 'login' %}">Already a user? Login</a>

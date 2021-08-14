@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | PaathShala</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main/login.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="form-wrapper">
+            <form action="" method="POST" id="login-form">
+                <div class="form-heading">Login</div>
+                {% csrf_token %}
+                <div class="input-group">
+                    <div class="input-label-img-wrapper">
+                        <span class="input-label-img" id="username-icon"></span>
+                    </div>
+                    <input type="text" class="form-input" id="username-input" placeholder="Username" name="username">
+                </div>
+                <div class="input-group">
+                    <div class="input-label-img-wrapper">
+                        <span class="input-label-img" id="password-icon"></span>
+                    </div>
+                    <input type="password" class="form-input" id="password-input" placeholder="Password" name="password">
+                </div>
+                <input type="submit" class="submit-form-btn btn" id="signup-submit-btn" value="Submit">
+            </form>
+            <div class="error-log">
+                {% for message in messages %}
+                    <span class="error-msg">{{message}}</span>
+                {% endfor %}
+                {% for field in form %}
+                {% if field.errors %}
+                    {% for error in field.errors %}
+                        <li class="errorlist">{{ error|escape }}</li>
+                    {% endfor %}
+                {% endif %}
+                {% endfor %}
+            </div>
+            <div class="signup-btn">
+                <a href="{% url 'signup' %}">Don't have an account? Make one</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

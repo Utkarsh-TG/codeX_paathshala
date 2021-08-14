@@ -16,15 +16,24 @@
                 <img src="{% static 'images/logowtext.png' %}" alt="logo image" width="200px" height="120px" id="logo-img">
             </div>
             <div class="nav-links-wrapper">
-                <a href="#features-container">Features</a>
                 <a href="{% url 'signup' %}">Signup</a>
                 <a href="{% url 'login' %}">Login</a>
             </div>
         </nav>
         <div class="main-content-wrapper">
-            <div class="content-left"></div>
+            <div class="content-left">
+                <div class="content-left-inner">
+                    <div class="content-left-text">
+                        Learn, Practice, Achieve. <br>Paath<span id="logo-text-markup">S</span>hala offers all in one resources required to score highest marks.
+                    </div>
+                    <div class="content-left-links">
+                        <a href="{% url 'signup' %}">Signup</a>
+                        <a href="#features">Learn more</a>
+                    </div>
+                </div>
+            </div>
             <div class="content-right">
-                <img src="{% static 'images/landingpagecontentright.png' %}" alt="study" srcset="" width="800px" height="500px">
+                <img src="{% static 'images/landingpagecontentright.png' %}" alt="study" srcset="" width="800px" height="635px" aspect-ratio="1.26">
                 <a href='https://www.freepik.com/vectors/school' hidden>School vector created by pch.vector - www.freepik.com</a>
             </div>
         </div>
