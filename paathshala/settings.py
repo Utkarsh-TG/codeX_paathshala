@@ -115,6 +115,14 @@ STATIC_URL = os.path.join(BASE_DIR, '/static/') # set static url
 LOGIN_REDIRECT_URL = '/login/' # default login redirect url
 LOGIN_URL = '/login/'
 
+MEDIA_URL = os.path.join(BASE_DIR, '/media/') # set media url
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # set media root
+
+#firebase config
+FIREBASE_DIR = os.path.join(SETTINGS_PATH, 'paathshala', "firebase_config.json")
+with open(FIREBASE_DIR, "r") as f:
+    FIREBASE_CONFIG = json.loads(f.read())
+    
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
