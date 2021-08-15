@@ -24,15 +24,15 @@ def signup(request):
         return redirect(userViews.dashboard)
     else:
         if request.method == 'POST':
-            form = CreateUserForm(request.POST) # create new user with form input
-            if form.is_valid(): # validate form input
-                form.save() # save form
+            form = CreateUserForm(request.POST)  # create new user with form input
+            if form.is_valid():  # validate form input
+                form.save()
                 user = form.cleaned_data.get('username')
                 messages.success(request, 'Succesfully created account for '+ user)
-                return redirect(loginUser) # redirect to login
+                return redirect(loginUser)  # redirect to login
             else:
                 # invalid signup credentials
-                messages.info(request, 'Invalid information') # return message error
+                messages.info(request, 'Invalid information')  # return message error
 
         form = CreateUserForm()
         context = {'form':form}
@@ -46,7 +46,7 @@ def loginUser(request):
             username = request.POST.get('username')
             password = request.POST.get('password')
 
-            user = authenticate(request, username=username, password=password) # authenticate user
+            user = authenticate(request, username=username, password=password)  # authenticate user
 
             if user is not None:
                 login(request, user)
