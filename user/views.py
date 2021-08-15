@@ -2,6 +2,7 @@ import os
 from django.conf import settings
 from django.shortcuts import render, redirect
 from django.http.response import HttpResponse, JsonResponse
+from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.decorators import login_required
 
 def ignition(request):
