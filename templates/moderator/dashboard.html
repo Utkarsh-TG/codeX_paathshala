@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,8 +10,46 @@
 <body>
     <svg width="80" height="80" data-jdenticon-value="{{ request.user }}"></svg>
     <h2>Moderator View as {{ request.user }}</h2>
-    <a href="/user/dashboard/">User View</a>
-    <a href="{% url 'logout' %}">Logout</a>
+
+    <strong>
+        <a href="/user/dashboard/">User View</a>
+        <br><br>
+        <a href="{% url 'logout' %}">Logout</a>
+    </strong>
+    <br><br>
+    <h1>Add new study material</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="text" name="form-title" value="add_resource_material" hidden>
+        <input type="text" name="resource-class" placeholder="Class">
+        <input type="text" name="resource-title" placeholder="Title">
+        <input type="text" name="resource-subject" placeholder="Subject">
+        <textarea name="resource-description" placeholder="Description"></textarea>
+        <input type="file" name="resource-file">
+        <button type="submit">Upload</button>
+    </form>
+    <br><br>
+    <h1>Add new practice material</h1>
+    <form>
+        <input type="text" id="form-title" value="add_practice_material" hidden>
+        <input type="text" id="practice-resource-class" placeholder="Class">
+        <input type="text" id="practice-resource-title" placeholder="Title">
+        <input type="text" id="practice-resource-subject" placeholder="Subject">
+        <textarea name="practice-resource-description" placeholder="Description"></textarea>
+        <div class="question-maker-wrapper">
+            <div class="question-functions">
+                <div id="add-new-long-ques">Add Long Question</div>
+                    <br><br>
+                <div id="add-new-mcq-ques">Add MCQ Question</div>
+            </div>
+            <div id="questions-wrapper">
+
+            </div>
+        </div>
+        <div id="submit-practice-material">Upload</div>
+    </form>
     <script src="https://cdn.jsdelivr.net/npm/jdenticon@3.1.1/dist/jdenticon.min.js" integrity="sha384-l0/0sn63N3mskDgRYJZA6Mogihu0VY3CusdLMiwpJ9LFPklOARUcOiWEIGGmFELx" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="{% static 'js/moderator/moderator_dashboard.js' %}"></script>
 </body>
 </html>
