@@ -103,3 +103,14 @@ input{
     padding: 15px 0px;
     font-size: 1.1em;
 }
+.website-logo-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+}
+#logo-img{
+    height: 60px;
+    width: 162px;
+    cursor: pointer;
+}

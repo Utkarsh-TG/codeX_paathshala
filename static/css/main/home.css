@@ -12,17 +12,6 @@ nav.navbar{
     padding: 10px 20px;
     align-items: center;
 }
-.website-logo-wrapper{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 60px;
-}
-#logo-img{
-    height: 60px;
-    width: 162px;
-    cursor: pointer;
-}
 .nav-links-wrapper > a{
     position: relative;
     color: #fefffe;

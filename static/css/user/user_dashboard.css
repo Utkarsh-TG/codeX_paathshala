@@ -1,0 +1,79 @@
+/*#FEFFFE, #053742, #39A2DB, #A2DBFA*/
+.navbar{
+    height: 80px;
+    background-color: #053742;
+    color: #FEFFFE;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.website-logo-wrapper{
+    justify-content: start;
+    background: #FEFFFE;
+    height: 80px;
+    padding: 0px 10px;
+}
+.user-functions{
+    display: flex;
+    align-items: center;
+}
+.user-icon-wrapper{
+    display: inline-block;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #FEFFFE;
+    margin-right: 10px;
+}
+.logout-btn{
+    display: inline-block;
+    padding: 8px;
+    text-align: center;
+    margin: 10px;
+    font-size: 1.2em;
+}
+.navbar-links{
+    display: flex;
+}
+.svg-icon {
+    width: 1em;
+    height: 1em;
+}
+.svg-icon path,
+.svg-icon polygon,
+.svg-icon rect {
+    fill: #A2DBFA;
+}
+.svg-icon circle {
+    stroke: #A2DBFA;
+}
+.resource-wrapper{
+    display: flex;
+    padding: 8px;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+#greet-msg{
+    padding: 8px;
+    font-size: 1.2em;
+}
+.dropdown-title{
+    padding: 0px 5px;
+}
+.dropdown-items{
+    display: none;
+    position: absolute;
+    top: 80px;
+    background: #053742;
+}
+.dropdown-item{
+    padding: 15px 40px;
+}
+.subject-dropdown{
+    position: absolute;
+    background: #053742;
+}
