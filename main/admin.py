@@ -3,3 +3,4 @@ from main.models import *
 
 admin.site.register(Study_Material)
 admin.site.register(Practice_Material)
+admin.site.register(Doubt)
