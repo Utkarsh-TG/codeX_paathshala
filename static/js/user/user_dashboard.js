@@ -1,12 +1,65 @@
 // get resource material
-var resources_data = [['6','7','8','9','10'],['Maths','Science','English','Hindi','Social Studies']]
+var resource_data = []
 
-// present resource material
-const showResourceMaterial = (data) => {
-    $('#resource-material-container').css({'display':'flex'})
-    $('#practice-material-container').css({'display':'none'})
-    $('#doubts-container').css({'display':'none'})
-    let parent = document.getElementById('resource-material-container')
+// open specific resource info
+const openStudyResource = (elem) => {
+    $('#study-resource-window').css({'display':'block'})
+    $('#practice-resource-window, #doubts-container, #study-material-container, #practice-material-container, .dropdown-items').css({'display':'none'})
+    let id = $(elem).attr('data-id')
+    let data = resource_data[id]
+    console.log(data)
+    let parent = document.getElementById('study-resource-window')
+    $('#study-resource-title').html(data.title)
+    $('#study-resource-date').html(data.date)
+    $('#study-resource-description').html(data.description)
+    $('#study-resource-file').attr('src',data.url+"#toolbar=0")
+    let tags_list = [data._class, data.subject, data.title]
+    let tags_wrapper = document.getElementById('study-resource-tags-wrapper')
+    for(let i=0;i<tags_list.length;i++){
+        let wrapper = document.createElement('span')
+        wrapper.classList.add('study-resource-tag')
+        $(wrapper).html(tags_list[i])
+        tags_wrapper.appendChild(wrapper)
+    }
+}
+
+const openPracticeResource = (elem) => {
+    $('#practice-resource-window').css({'display':'block'})
+    $('#study-resource-window, #doubts-container, #doubt-reply-window, #study-material-container, #practice-material-container').css({'display':'none'})
+}
+
+// present study material
+const showStudyResources = (data) => {
+    let parent = document.getElementById('study-material-container')
+    parent.innerHTML = ''
+    // generate study resources from data
+    for(let i=0;i<data.length;i++){
+        let wrapper = document.createElement('div')
+        wrapper.classList.add('study-resource-wrapper', 'block-content')
+        $(wrapper).html('<div class="resource-title">' + data[i].title + '</div><div class="resource-date">' + data[i].date + '</div>')
+        $(wrapper).attr({'data-id':i, 'data-header':'study-material'})
+        $(wrapper).click((e)=>{
+            openStudyResource(e.currentTarget)
+        })
+        parent.appendChild(wrapper)
+    }
+}
+
+//present practice material
+const showPracticeResources = (data) => {
+    let parent = document.getElementById('practice-material-container')
+    parent.innerHTML = ''
+    // generate practice resources from data
+    for(let i=0;i<data.length;i++){
+        let wrapper = document.createElement('div')
+        wrapper.classList.add('practice-resource-wrapper', 'block-content')
+        $(wrapper).html('<div class="resource-title">' + data[i].title + '</div><div class="resource-date">' + data[i].date + '</div>')
+        $(wrapper).attr({'data-id':i, 'data-header':'practice-material'})
+        $(wrapper).click((e)=>{
+            openPracticeResource(e.currentTarget)
+        })
+        parent.appendChild(wrapper)
+    }
 }
 
 // get resource data
@@ -14,7 +67,7 @@ const getResourceData = (elem) => {
     let data_type = $(elem).attr('data-type')
     let data_header = $(elem).attr('data-header')
     let filter_data = $(elem).attr('filter-data')
-    // make ajax request with filters
+    // retrieve resources data with filters
     $.ajax({
         type: 'POST',
         url: '/user/study_material/',
@@ -25,35 +78,64 @@ const getResourceData = (elem) => {
             csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
         },
         success: function(data){
-            let tempData = data.study_material;
-            console.log(tempData)
-            showResourceMaterial(data)
-            $('#study-dropdown-items').css({'display':'none'})
-            $('#practice-dropdown-items').css({'display':'none'})
+            if(data_header == "study-material"){
+                $('#study-material-container').css({'display':'flex'})
+                $('#practice-material-container').css({'display':'none'})
+                let tempData = data.study_material;
+                resource_data = tempData;
+                showStudyResources(tempData)
+            }
+            else if(data_header == "practice-material"){
+                $('#practice-material-container').css({'display':'flex'})
+                $('#study-material-container').css({'display':'none'})
+                let tempData = data.practice_material;
+                resource_data = tempData;
+                showPracticeResources(tempData)
+            }
+            $('#study-dropdown-items, #practice-dropdown-items, #study-resource-window, #doubts-container, #practice-resource-window').css({'display':'none'})
         },
     })
 }
 
+$('#study-material-dropdown').click(()=>{
+    $('#study-dropdown-items').toggle()
+    //$('#study-dropdown-items').css({'display':'block'})
+    $('#practice-dropdown-items').css({'display':'none'})
+})
+
+$('#practice-material-dropdown').click(()=>{
+    $('#practice-dropdown-items').toggle()
+    $('#study-dropdown-items').css({'display':'none'})
+})
+
+$('#doubts-viewer').click(()=>{
+    $('#doubts-container').css({'display':'block'})
+    $('.doubts-wrapper, #doubts-function').css({'display':'flex'})
+    $('#practice-dropdown-items, #study-material-container, #practice-material-container, #study-resource-window, #practice-resource-window, #doubt-reply-window, #study-dropdown-items, .ask-doubt-window-wrapper').css({'display':'none'})
+})
+
 // set resources dropdown
+var dropdown_data = [['6','7','8','9','10'],['Maths','Science','English','Hindi','Social Studies']]
+
 const setResourcesDropdown = () => {
     // add dropdown UI
     let addDropdown = (parent, parentName) => {
         parent.innerHTML = ''
-        for(let i=0;i<resources_data[0].length;i++){
-            wrapper = document.createElement('div')
+        for(let i=0;i<dropdown_data[0].length;i++){
+            let wrapper = document.createElement('div')
             wrapper.classList.add('dropdown-item')
-            $(wrapper).attr({'data-type':'class','data-header':parentName,'filter-data':resources_data[0][i]})
-            wrapper.innerHTML = 'Class ' + resources_data[0][i]
+            $(wrapper).attr({'data-type':'class','data-header':parentName,'filter-data':dropdown_data[0][i]})
+            wrapper.innerHTML = 'Class ' + dropdown_data[0][i]
             $(wrapper).click((e)=>{
                 getResourceData(e.currentTarget)
             })
             parent.appendChild(wrapper)
         }
-        for(let j=0;j<resources_data[1].length;j++){
-            wrapper = document.createElement('div')
+        for(let j=0;j<dropdown_data[1].length;j++){
+            let wrapper = document.createElement('div')
             wrapper.classList.add('dropdown-item')
-            $(wrapper).attr({'data-type':'subject','data-header':parentName,'filter-data':resources_data[1][j]})
-            wrapper.innerHTML = resources_data[1][j]
+            $(wrapper).attr({'data-type':'subject','data-header':parentName,'filter-data':dropdown_data[1][j]})
+            wrapper.innerHTML = dropdown_data[1][j]
             $(wrapper).click((e)=>{
                 getResourceData(e.currentTarget)
             })
@@ -68,13 +150,3 @@ const setResourcesDropdown = () => {
 }
 
 setResourcesDropdown()
-
-$('#study-material-dropdown').click(()=>{
-    $('#study-dropdown-items').css({'display':'block'})
-    $('#practice-dropdown-items').css({'display':'none'})
-})
-
-$('#practice-material-dropdown').click(()=>{
-    $('#practice-dropdown-items').css({'display':'block'})
-    $('#study-dropdown-items').css({'display':'none'})
-})
