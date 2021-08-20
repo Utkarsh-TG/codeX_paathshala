@@ -1,8 +1,9 @@
 import os
 from json import dumps, loads
 from datetime import datetime
+from django import http
 from django.conf import settings
-from django.http import response
+from django.http import request, response
 from django.shortcuts import render, redirect
 from django.http.response import HttpResponse, JsonResponse
 from django.core.files.storage import FileSystemStorage
@@ -83,11 +84,59 @@ def ask_doubt(request):
         tags = request.POST.get('tags', False)
         questionID = request.POST.get('id', False)
         
+        if not content or not tags or not questionID:
+            return HttpResponse('')
         date_time = datetime.utcnow() # get current date and time in UTC
 
         doubtsDB = doubts_db(user=user, content=content, tags=tags, responses=[], votes=[], _id=questionID, date=date_time)
 
         doubtsDB.save()
+
+        return HttpResponse('')
+
+    return redirect(dashboard)
+
+@login_required
+def post_answer(request):
+    if request.method == 'POST':
+        user = request.user
+        content = request.POST.get('content', False)
+        questionId = request.POST.get('question', False)
+
+        if not content or not questionId:
+            return HttpResponse('')
+
+        # update question data
+
+        question = doubts_db.objects.get(_id=questionId)
+
+        pre_responses = question.responses
+
+        newResponse = {'user':str(user),'content':content}
+        
+        question.responses.append(newResponse)
+
+        question.save()
+
+        return HttpResponse('')
+
+    return redirect(dashboard)
+
+@login_required
+def upvote(request):
+    if request.method == 'POST':
+        user = request.user
+        question_id = request.POST.get('question', False)
+
+        if not question_id:
+            return HttpResponse('')
+
+        question = doubts_db.objects.get(_id=question_id)
+
+        if str(user) not in question.votes:
+            question.votes.append(str(user))
+
+            question.save()
 
         return HttpResponse('')
 

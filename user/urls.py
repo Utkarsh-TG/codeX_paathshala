@@ -9,4 +9,6 @@ urlpatterns = [
     path('study_material/', views.study_material, name='study_material'),
     path('firebase_config/', views.firebase_config, name='firebase_config'),
     path('ask_doubt/', views.ask_doubt, name='ask_doubt'),
+    path('post_answer/', views.post_answer, name='post_answer'),
+    path('upvote/', views.upvote, name='upvote'),
 ]
