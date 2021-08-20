@@ -90,8 +90,8 @@
                 </div>
                 <input type="text" id="doubt-tag-input" placeholder="Enter tags separated by comma">
                 <div class="ask-ques-button-wrapper">
-                    <div id="return-ask-doubt-window">Return</div>
-                    <div id="post-doubt-btn">Post Question</div>
+                    <div class="btn" id="return-ask-doubt-window">Return</div>
+                    <div class="btn" id="post-doubt-btn">Post Question</div>
                 </div>
             </div>
         </div>
@@ -112,10 +112,12 @@
                     </div>
                 </div>
             </div>
+            <div class="reply-question-heading">Answers</div>
             <div id="reply-question-answers-container">
 
             </div>
             <div class="reply-question-editor-container">
+                <div class="text-editor-heading">Your Answer</div>
                 <div id="reply-text-editor-wrapper">
                     <div id="reply-editor-container"></div>
                 </div>
@@ -127,13 +129,19 @@
         <div class="tags-list" id="study-resource-tags-wrapper"></div>
         <div class="study-resource-info-wrapper">
             <div id="study-resource-title"></div>
-            <div id="study-resource-date"></div>
+            <div id="study-resource-date"></div>    
         </div>
         <div id="study-resource-description"></div>
         <iframe id="study-resource-file" src="" frameborder="0"></iframe>
     </div>
     <div id="practice-resource-window">
-
+        <div class="tags-list" id="practice-resource-tags-wrapper"></div>
+        <div class="practice-resource-info-wrapper">
+            <div id="practice-resource-title"></div>
+            <div id="practice-resource-date"></div>    
+        </div>
+        <div id="practice-resource-description"></div>
+        <div id="practice-questions-container"></div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/jdenticon@3.1.1/dist/jdenticon.min.js" integrity="sha384-l0/0sn63N3mskDgRYJZA6Mogihu0VY3CusdLMiwpJ9LFPklOARUcOiWEIGGmFELx" crossorigin="anonymous"></script>
     <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
