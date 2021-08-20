@@ -1,21 +1,20 @@
 // get resource material
 var resource_data = []
-
+var validOptions = ['A','B','C','D']
 // open specific resource info
 const openStudyResource = (elem) => {
     $('#study-resource-window').css({'display':'block'})
     $('#practice-resource-window, #doubts-container, #study-material-container, #practice-material-container, .dropdown-items').css({'display':'none'})
     let id = $(elem).attr('data-id')
     let data = resource_data[id]
-    console.log(data)
-    let parent = document.getElementById('study-resource-window')
     $('#study-resource-title').html(data.title)
     $('#study-resource-date').html(data.date)
     $('#study-resource-description').html(data.description)
-    $('#study-resource-file').attr('src',data.url+"#toolbar=0")
+    $('#study-resource-file').attr('src',data.url)
     let tags_list = [data._class, data.subject, data.title]
     let tags_wrapper = document.getElementById('study-resource-tags-wrapper')
-    for(let i=0;i<tags_list.length;i++){
+    tags_wrapper.innerHTML = ''
+    for(let i in tags_list){
         let wrapper = document.createElement('span')
         wrapper.classList.add('study-resource-tag')
         $(wrapper).html(tags_list[i])
@@ -26,6 +25,60 @@ const openStudyResource = (elem) => {
 const openPracticeResource = (elem) => {
     $('#practice-resource-window').css({'display':'block'})
     $('#study-resource-window, #doubts-container, #doubt-reply-window, #study-material-container, #practice-material-container').css({'display':'none'})
+    let id = $(elem).attr('data-id')
+    let data = resource_data[id]
+    $('#practice-resource-title').html(data.title)
+    $('#practice-resource-date').html(data.date)
+    $('#practice-resource-description').html(data.description)
+    let tags_list = [data._class, data.subject, data.title]
+    let tags_wrapper = document.getElementById('practice-resource-tags-wrapper')
+    tags_wrapper.innerHTML = ''
+    for(let i in tags_list){
+        let wrapper = document.createElement('span')
+        wrapper.classList.add('practice-resource-tag')
+        $(wrapper).html(tags_list[i])
+        tags_wrapper.appendChild(wrapper)
+    }
+    let questions_list = data.questions
+    let parent = document.getElementById('practice-questions-container')
+    $(parent).html('')
+    for(let j in questions_list){
+        let questionData = questions_list[j]
+        let question_wrapper = document.createElement('div')
+        question_wrapper.classList.add('practice-question-wrapper')
+        let questionContent = document.createElement('div')
+        questionContent.classList.add('practice-question-text')
+        let questionNum = parseInt(j) + 1
+        $(questionContent).html('Question '+ questionNum +': '+questionData.questionText)
+        question_wrapper.appendChild(questionContent)
+        let optionsWrapper = document.createElement('div')
+        optionsWrapper.classList.add('practice-options-wrapper')
+        
+        options_list = questionData.optionsList
+        for(n in options_list){
+            optionWrap = document.createElement('div')
+            optionWrap.classList.add('practice-option-wrapper')
+            $(optionWrap).html(validOptions[n]+': '+options_list[n])
+            optionsWrapper.appendChild(optionWrap)
+        }
+
+        let correctOptionBtn = document.createElement('div')
+        correctOptionBtn.classList.add('practice-correct-option-btn')
+        $(correctOptionBtn).html('Show Correct Option')
+        let correctOptionText = document.createElement('div')
+        correctOptionText.classList.add('practice-correct-option-text')
+        
+        $(correctOptionText).html((questionData.correctOption).toUpperCase())
+        $(correctOptionBtn).click(()=>{
+            $(correctOptionText).toggle()
+        })
+
+        parent.appendChild(question_wrapper)
+        question_wrapper.appendChild(optionsWrapper)
+        
+        question_wrapper.appendChild(correctOptionBtn)
+        question_wrapper.appendChild(correctOptionText)
+    }
 }
 
 // present study material
@@ -33,7 +86,7 @@ const showStudyResources = (data) => {
     let parent = document.getElementById('study-material-container')
     parent.innerHTML = ''
     // generate study resources from data
-    for(let i=0;i<data.length;i++){
+    for(let i in data){
         let wrapper = document.createElement('div')
         wrapper.classList.add('study-resource-wrapper', 'block-content')
         $(wrapper).html('<div class="resource-title">' + data[i].title + '</div><div class="resource-date">' + data[i].date + '</div>')
@@ -50,7 +103,7 @@ const showPracticeResources = (data) => {
     let parent = document.getElementById('practice-material-container')
     parent.innerHTML = ''
     // generate practice resources from data
-    for(let i=0;i<data.length;i++){
+    for(let i in data){
         let wrapper = document.createElement('div')
         wrapper.classList.add('practice-resource-wrapper', 'block-content')
         $(wrapper).html('<div class="resource-title">' + data[i].title + '</div><div class="resource-date">' + data[i].date + '</div>')
@@ -121,7 +174,7 @@ const setResourcesDropdown = () => {
     // add dropdown UI
     let addDropdown = (parent, parentName) => {
         parent.innerHTML = ''
-        for(let i=0;i<dropdown_data[0].length;i++){
+        for(let i in dropdown_data[0]){
             let wrapper = document.createElement('div')
             wrapper.classList.add('dropdown-item')
             $(wrapper).attr({'data-type':'class','data-header':parentName,'filter-data':dropdown_data[0][i]})
@@ -131,7 +184,7 @@ const setResourcesDropdown = () => {
             })
             parent.appendChild(wrapper)
         }
-        for(let j=0;j<dropdown_data[1].length;j++){
+        for(let j in dropdown_data[1]){
             let wrapper = document.createElement('div')
             wrapper.classList.add('dropdown-item')
             $(wrapper).attr({'data-type':'subject','data-header':parentName,'filter-data':dropdown_data[1][j]})
