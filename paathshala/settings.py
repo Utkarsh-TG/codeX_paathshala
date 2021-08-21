@@ -2,6 +2,7 @@ import os
 import json
 from pathlib import Path
 from dotenv import load_dotenv 
+import django_heroku
 
 load_dotenv() # load environment variables
 
@@ -114,9 +115,6 @@ STATIC_URL = os.path.join(BASE_DIR, '/static/') # set static url
 
 LOGIN_REDIRECT_URL = '/login/' # default login redirect url
 LOGIN_URL = '/login/'
-
-MEDIA_URL = os.path.join(BASE_DIR, '/media/') # set media url
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # set media root
 
 #firebase config
 FIREBASE_DIR = os.path.join(SETTINGS_PATH, 'paathshala', "firebase_config.json")
