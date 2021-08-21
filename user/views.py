@@ -4,8 +4,8 @@ from datetime import datetime
 from django import http
 from django.conf import settings
 from django.http import request, response
-from django.shortcuts import render, redirect
 from django.http.response import HttpResponse, JsonResponse
+from django.shortcuts import render, redirect
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.decorators import login_required
 from main.models import Study_Material as sm_db # study material data base
@@ -112,6 +112,7 @@ def post_answer(request):
 
         pre_responses = question.responses
 
+        # update responses
         newResponse = {'user':str(user),'content':content}
         
         question.responses.append(newResponse)
