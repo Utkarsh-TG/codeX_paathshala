@@ -12,7 +12,7 @@ SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 
-ALLOWED_HOSTS = ['127.0.0.1', '.r.appspot.com']
+ALLOWED_HOSTS = ['127.0.0.1', '.r.appspot.com', '.herokuapp.com']
 
 if(os.getenv('DEBUG') == 'false'): # get debug info from env
     DEBUG = False
