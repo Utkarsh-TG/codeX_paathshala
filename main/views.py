@@ -28,15 +28,17 @@ def signup(request):
             if form.is_valid():  # validate form input
                 form.save()
                 user = form.cleaned_data.get('username')
-                messages.success(request, 'Succesfully created account for '+ user)
+                #messages.success(request, 'Succesfully created account for '+ user)
                 return redirect(loginUser)  # redirect to login
             else:
                 # invalid signup credentials
-                messages.info(request, 'Invalid information')  # return message error
+                #messages.info(request, 'Invalid information')  # return message error
+                context = {'form':form}
+                return render(request, 'main/signup.html', context)
 
-        form = CreateUserForm()
-        context = {'form':form}
-        return render(request, 'main/signup.html', context)
+    form = CreateUserForm()
+    context = {'form':form}
+    return render(request, 'main/signup.html', context)
 
 def loginUser(request):
     if request.user.is_authenticated:
