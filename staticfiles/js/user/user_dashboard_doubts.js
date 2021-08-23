@@ -50,9 +50,9 @@ $('#doubts-search-btn').click(()=>{
     let searchVal = $('#doubts-filter-search').val().toUpperCase()
     let doubtsWrapper = document.getElementById('doubts-wrapper').childNodes
 
-    for(let i in doubtsWrapper){
+    for(let i = 0; i < doubtsWrapper.length; i++){
         let tags = doubtsWrapper[i].getElementsByClassName('doubt-info-wrapper')[0].getElementsByClassName('doubt-info-inner')[0].getElementsByClassName('tags-wrapper')[0].getElementsByClassName('doubt-tag')
-        for(let j in tags){
+        for(let j = 0; j < tags.length; j++){
             tagVal = tags[j].innerHTML.toUpperCase()
             if(tagVal.indexOf(searchVal) > -1){
                 doubtsWrapper[i].style.display = ''
@@ -106,7 +106,7 @@ const addDoubtHTML = (wrapper, doubt) => {
     let tags = JSON.parse(doubt.tags)
     let tagsWrapper = document.createElement('div')
     tagsWrapper.classList.add('tags-wrapper')
-    for(let i in tags){
+    for(let i = 0; i < tags.length; i++){
         let tag = document.createElement('span')
         tag.classList.add('doubt-tag')
         tag.innerHTML = tags[i]
@@ -119,7 +119,7 @@ const addDoubtHTML = (wrapper, doubt) => {
 const generateDoubts = (doubts, user_doubts) => {
     let parent = document.getElementById('doubts-wrapper')
     parent.innerHTML = ''
-    for(let i in doubts){
+    for(let i = 0; i < doubts.length; i++){
         let wrapper = document.createElement('div')
         wrapper.classList.add('doubt-wrapper', 'doubt')
         addDoubtHTML(wrapper, doubts[i])
@@ -128,7 +128,7 @@ const generateDoubts = (doubts, user_doubts) => {
     }
     parent = document.getElementById('user-doubts-wrapper')
     parent.innerHTML = '<span class="section-heading">Your Profile</span>'
-    for(let i in user_doubts){
+    for(let i = 0; i < user_doubts.length; i++){
         let wrapper = document.createElement('div')
         wrapper.classList.add('doubt-wrapper', 'user-doubt')
         addDoubtHTML(wrapper, user_doubts[i])
@@ -153,7 +153,7 @@ const updateDoubtsData = () => {
             user_doubts_data = data.user_doubts
             generateDoubts(doubts_data, user_doubts_data)
             if(typeof questionId !== 'undefined'){
-                for(let i in doubts_data){
+                for(let i = 0; i < doubts_data.length; i++){
                     if(doubts_data[i]._id == questionId){
                         generateDoubtWindow(doubts_data[i])
                     }
@@ -173,7 +173,7 @@ const generatePreResponses = (data) => {
     let parent = document.getElementById('reply-question-answers-container')
     parent.innerHTML = ''
     //console.log(data)
-    for(let i in data){
+    for(let i = 0; i < data.length; i++){
         answer_wrapper = document.createElement('div')
         answer_wrapper.classList.add('answer-wrapper')
         $(answer_wrapper).html('<div class="answer-user-info-wrapper"><div class="answer-doubt-user-icon"><svg class="svg-user-icon" width="50px" height="50px" data-jdenticon-value="'+ data[i].user +'"></svg></div><span class="answer-doubt-user-name">'+ data[i].user +'</span></div><div class="answer-content-wrapper">'+ data[i].content +'</div>')
@@ -199,7 +199,7 @@ const generateDoubtWindow = (data) => {
     tagParent = document.getElementById('reply-question-tags-container')
     let tags = JSON.parse(data.tags)
     tagParent.innerHTML = ''
-    for(let i in tags){
+    for(let i = 0; i < tags.length; i++){
         tag_wrapper = document.createElement('span')
         tag_wrapper.classList.add('doubt-tag')
         $(tag_wrapper).html(tags[i])
@@ -306,7 +306,7 @@ const replyDoubt = (elem, from) => {
     }else if(from == 'question-btn'){
         questionId = $(elem).parent().parent().attr('data-id')
     }
-    for(let i in doubts_data){
+    for(let i = 0; i < doubts_data.length; i++){
         if(doubts_data[i]._id == questionId){
             generateDoubtWindow(doubts_data[i])
         }
@@ -352,8 +352,11 @@ const uploadDoubt = () => {
             clearInterval(interval)
             content = ($('#editor-container .ql-editor').html()).toString()
             if(content != '<p><br></p>' && typeof content != 'undefined'){
-                tags = $('#doubt-tag-input').val()
-                tags = tags.split(',')
+                var tags = []
+                if($('#doubt-tag-input').val() != ''){
+                    tags.push = $('#doubt-tag-input').val()
+                    tags = tags.split(',')
+                }
                 dateToday = new Date()
                 id = '#'+dateToday.toISOString().replace(/[\-\.\:ZT]/g,"").substr(0,14)
                 tags.push(id)

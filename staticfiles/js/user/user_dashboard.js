@@ -14,7 +14,7 @@ const openStudyResource = (elem) => {
     let tags_list = [data._class, data.subject, data.title]
     let tags_wrapper = document.getElementById('study-resource-tags-wrapper')
     tags_wrapper.innerHTML = ''
-    for(let i in tags_list){
+    for(let i = 0; i < tags_list.length; i++){
         let wrapper = document.createElement('span')
         wrapper.classList.add('study-resource-tag')
         $(wrapper).html(tags_list[i])
@@ -33,7 +33,7 @@ const openPracticeResource = (elem) => {
     let tags_list = [data._class, data.subject, data.title]
     let tags_wrapper = document.getElementById('practice-resource-tags-wrapper')
     tags_wrapper.innerHTML = ''
-    for(let i in tags_list){
+    for(let i = 0; i < tags_list.length; i++){
         let wrapper = document.createElement('span')
         wrapper.classList.add('practice-resource-tag')
         $(wrapper).html(tags_list[i])
@@ -42,7 +42,7 @@ const openPracticeResource = (elem) => {
     let questions_list = data.questions
     let parent = document.getElementById('practice-questions-container')
     $(parent).html('')
-    for(let j in questions_list){
+    for(let j = 0; j < questions_list.length; j++){
         let questionData = questions_list[j]
         let question_wrapper = document.createElement('div')
         question_wrapper.classList.add('practice-question-wrapper')
@@ -55,7 +55,7 @@ const openPracticeResource = (elem) => {
         optionsWrapper.classList.add('practice-options-wrapper')
         
         options_list = questionData.optionsList
-        for(n in options_list){
+        for(let n = 0; n < options_list.length; n++){
             optionWrap = document.createElement('div')
             optionWrap.classList.add('practice-option-wrapper')
             $(optionWrap).html(validOptions[n]+': '+options_list[n])
@@ -86,7 +86,7 @@ const showStudyResources = (data) => {
     let parent = document.getElementById('study-material-container')
     parent.innerHTML = ''
     // generate study resources from data
-    for(let i in data){
+    for(let i = 0; i < data.length; i++){
         let wrapper = document.createElement('div')
         wrapper.classList.add('study-resource-wrapper', 'block-content')
         $(wrapper).html('<div class="resource-title">' + data[i].title + '</div><div class="resource-date">' + data[i].date + '</div>')
@@ -103,7 +103,7 @@ const showPracticeResources = (data) => {
     let parent = document.getElementById('practice-material-container')
     parent.innerHTML = ''
     // generate practice resources from data
-    for(let i in data){
+    for(let i = 0; i < data.length; i++){
         let wrapper = document.createElement('div')
         wrapper.classList.add('practice-resource-wrapper', 'block-content')
         $(wrapper).html('<div class="resource-title">' + data[i].title + '</div><div class="resource-date">' + data[i].date + '</div>')
@@ -174,7 +174,7 @@ const setResourcesDropdown = () => {
     // add dropdown UI
     let addDropdown = (parent, parentName) => {
         parent.innerHTML = ''
-        for(let i in dropdown_data[0]){
+        for(let i = 0; i < dropdown_data[0].length; i++){
             let wrapper = document.createElement('div')
             wrapper.classList.add('dropdown-item')
             $(wrapper).attr({'data-type':'class','data-header':parentName,'filter-data':dropdown_data[0][i]})
@@ -184,7 +184,7 @@ const setResourcesDropdown = () => {
             })
             parent.appendChild(wrapper)
         }
-        for(let j in dropdown_data[1]){
+        for(let j = 0; j < dropdown_data[1].length; j++){
             let wrapper = document.createElement('div')
             wrapper.classList.add('dropdown-item')
             $(wrapper).attr({'data-type':'subject','data-header':parentName,'filter-data':dropdown_data[1][j]})
