@@ -40,7 +40,9 @@ To run this project, you will need to add the following environment variables to
 
 `DEBUG`
 
-`FIREBASE_CONFIG` in your firebase_config.json
+in your firebase_config.json
+
+`FIREBASE_CONFIG` 
 
   
 ## Features
@@ -49,3 +51,18 @@ To run this project, you will need to add the following environment variables to
 - Practice resources 
 - Interactive Forum
 - Moderator dashboard
+
+
+## Additionals
+
+API used
+
+- [JQUERY](https://jquery.com/)
+- [Google Firebase](https://firebase.google.com/)
+- [JDENTICON](https://jdenticon.com/)
+- [quilljs](https://quilljs.com/playground/)
+
+Libraries Used
+
+- [Django](https://www.djangoproject.com/)
+- [JQUERY](https://jquery.com/)
