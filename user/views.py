@@ -88,7 +88,7 @@ def ask_doubt(request):
             return HttpResponse('')
         date_time = datetime.utcnow() # get current date and time in UTC
 
-        doubtsDB = doubts_db(user=user, content=content, tags=loads(tags), responses=[], votes=[], _id=questionID, date=date_time)
+        doubtsDB = doubts_db(user=user, content=content, tags=tags, responses=[], votes=[], _id=questionID, date=date_time)
 
         doubtsDB.save()
 
