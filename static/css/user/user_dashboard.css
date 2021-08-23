@@ -612,3 +612,9 @@ blockquote{
     font-weight: 600;
     font-size: 1.3em;
 }
+#practice-resource-window a, #study-resource-window a{
+    color: blue;
+}
+.doubt-tag{
+    user-select: none;
+}
