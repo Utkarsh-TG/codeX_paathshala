@@ -9,8 +9,7 @@ https://paathshala-v-codex.herokuapp.com
 PaathShala is a complete web application for 
 student to prepare for examinations.
 
-
-
+_**Currently Sample data only consists of maths resources, others can be added later**_
 
 
 
@@ -37,6 +36,10 @@ this project, some are listed below
 To run this project, you will need to add the following environment variables to your .env file
 
 `SECRET_KEY`
+
+`DB_USER`
+
+`DB_PASSWORD`
 
 `DEBUG`
 
