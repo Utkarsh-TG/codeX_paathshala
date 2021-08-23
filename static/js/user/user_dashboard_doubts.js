@@ -354,8 +354,7 @@ const uploadDoubt = () => {
             if(content != '<p><br></p>' && typeof content != 'undefined'){
                 var tags = []
                 if($('#doubt-tag-input').val() != ''){
-                    tags.push = $('#doubt-tag-input').val()
-                    tags = tags.split(',')
+                    tags = ($('#doubt-tag-input').val()).split(',')
                 }
                 dateToday = new Date()
                 id = '#'+dateToday.toISOString().replace(/[\-\.\:ZT]/g,"").substr(0,14)
