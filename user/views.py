@@ -83,12 +83,12 @@ def ask_doubt(request):
         content = request.POST.get('content', False)  # get html question content
         tags = request.POST.get('tags', False)
         questionID = request.POST.get('id', False)
-        
-        if not content or not tags or not questionID:
+
+        if not content or not questionID:
             return HttpResponse('')
         date_time = datetime.utcnow() # get current date and time in UTC
 
-        doubtsDB = doubts_db(user=user, content=content, tags=loads(tags), responses=[], votes=[], _id=questionID, date=date_time)
+        doubtsDB = doubts_db(user=user, content=content, tags=tags, responses=[], votes=[], _id=questionID, date=date_time)
 
         doubtsDB.save()
 
