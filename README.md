@@ -4,7 +4,7 @@
 Project entry for CodeX Hackathon 2021.
 
 Currently the server is running at -
-https://paathshala-v-codex.herokuapp.com
+https://paathshala-v-codex.herokuapp.com (taken down)
 
 PaathShala is a complete web application for 
 student to prepare for examinations.
